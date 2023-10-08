@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const ChatacterSlice = createSlice({
+export const CharacterSlice = createSlice({
     name: 'Default',
     initialState: {
         defaultText: "Default Text",
@@ -17,6 +17,6 @@ export const ChatacterSlice = createSlice({
 
 export const {
     setChangeCharacter,
-} = ChatacterSlice.actions
+} = CharacterSlice.actions
 
-export default ChatacterSlice.reducer
+export default CharacterSlice.reducer

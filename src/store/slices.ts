@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import ChatacterSlice from "./Character/characterSlice";
+import CharacterSlice from "./Character/characterSlice";
 
 export default combineReducers({
-    ChatacterSlice: ChatacterSlice,
+    CharacterSlice: CharacterSlice,
 }) 
