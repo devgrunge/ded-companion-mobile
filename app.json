@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "dnd-companion-front",
-    "slug": "dnd-companion-front",
+    "name": "dedcompanion",
+    "slug": "dedcompanion",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
