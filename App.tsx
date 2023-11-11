@@ -1,6 +1,7 @@
 import NavContainer from "./src/navigation/container";
 
 const App = () => {
+  
   return <NavContainer />;
 };
 

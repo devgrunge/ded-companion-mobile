@@ -1,13 +1,14 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import App from "../../views/index";
+import Home from "../../views/home"
+import App from "../../../App";
 import { index } from "../screenNames";
 
 const MyStack = createStackNavigator();
 const Stack = () => {
   return (
     <MyStack.Navigator screenOptions={{ headerShown: false }}>
-      <MyStack.Screen name={index} component={App} />
+      <MyStack.Screen name={index} component={Home} />
     </MyStack.Navigator>
   );
 };
