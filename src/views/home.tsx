@@ -1,45 +1,65 @@
-import React , { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useTheme, TextInput } from "react-native-paper";
-// import { useApi } from "../hooks/useApi";
+import { useApiGet } from "../hooks/useApi";
+import { useNavigation } from "@react-navigation/native";
 
-const EmailInput = () => {
-  const [text] = React.useState('Useless Text');
-  const [number, onChangeNumber] = React.useState('');
-}
-const PassInput = () => {
-  const [text] = React.useState('Useless Text');
-  const [number] = React.useState('');
-}
- 
-const Home : FC<React.ReactElement> = () => {
+const Home: FC<React.ReactElement> = () => {
+  const { data, status, statusText } = useApiGet("http://localhost:3338");
   const theme = useTheme();
-  const [text] = React.useState();
-  const [number, onChangeNumber] = React.useState('');
+  let text: string;
 
-  const themeStyle = {
-    colors: theme.colors
+  const navigation = useNavigation();
+
+  const handleNavigation = () => {
+    navigation.navigate("register" as never);
   };
+  console.log("==>", data);
 
   return (
     <View style={styles.container}>
-      <View>
+      <Text
+        style={{ fontSize: 20, fontWeight: "600", color: theme.colors.outline }}
+      >
+        Login with your account
+      </Text>
       <TextInput
-      label="Email"
-      placeholder="Email"
-      value={text}
-  
-    />
-          <TextInput
-      caretHidden={true}
-      label="Password"
-      placeholder="Password"
-      value={text}
-    />
-    
-    
-    
-      </View>
+        style={{
+          width: "80%",
+          color: theme.colors.shadow,
+          borderTopLeftRadius: 25,
+          borderTopRightRadius: 25
+        }}
+        label="Email"
+        placeholder="Email"
+        value={text}
+      />
+      <TextInput
+        style={{
+          width: "80%",
+          color: theme.colors.shadow,
+          borderTopLeftRadius: 25,
+          borderTopRightRadius: 25
+        }}
+        caretHidden={true}
+        label="Password"
+        placeholder="Password"
+        value={text}
+      />
+      <TouchableOpacity
+        onPress={handleNavigation}
+        style={{
+          backgroundColor: theme.colors.primaryContainer,
+          padding: 20,
+          alignItems: "center",
+          width: "80%",
+          borderRadius: 25,
+          borderColor: theme.colors.shadow,
+          borderWidth: 1
+        }}
+      >
+        <Text style={{ color: theme.colors.shadow }}>Login</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -49,15 +69,15 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    padding:20,
+    backgroundColor: "#e7e7e7",
+    padding: 20,
     alignItems: "center",
-    justifyContent: "space-between",
-    
+    justifyContent: "space-around"
   },
   input: {
     height: 40,
     margin: 12,
     borderWidth: 1,
-    padding: 10}
+    padding: 10
+  }
 });

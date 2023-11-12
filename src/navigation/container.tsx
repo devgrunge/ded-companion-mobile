@@ -27,16 +27,16 @@ interface INavConteiner {
 }
 const NavContainer = ({ callback }: INavConteiner) => {
   return (
-    <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <NavigationContainer onReady={callback}>
+    <NavigationContainer onReady={callback}>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
           <PaperProvider theme={theme}>
             <StatusBar barStyle="light-content" />
             <Stack />
           </PaperProvider>
-        </NavigationContainer>
-      </PersistGate>
-    </Provider>
+        </PersistGate>
+      </Provider>
+    </NavigationContainer>
   );
 };
 
