@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import Toast from 'react-native-toast-message';
 
 export type TApiResponse = {
     status: number;
     statusText: string;
-    data: any; // Change the type of data to any
-    error: any; // Change the type of error to any
+    data: unknown;
+    error: unknown;
     loading: boolean;
 };
 
@@ -23,8 +24,18 @@ export const useApiGet = (url: string): TApiResponse => {
             setData(request.data);
             setStatus(request.status);
             setStatusText(request.statusText);
+            Toast.show({
+                type: 'success',
+                text1: 'Hello, ',
+                text2: 'Welcome to your battle companion 👋'
+            });
         } catch (error) {
             setError(error);
+            Toast.show({
+                type: 'error',
+                text1: 'Hello, ',
+                text2: 'Could not connect to server 👋'
+            });
         }
         setLoading(false);
     };

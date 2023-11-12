@@ -8,8 +8,11 @@ import RegisterScreen from "../../views/RegisterScreen";
 const MyStack = createStackNavigator();
 const Stack = () => {
   return (
-    <MyStack.Navigator children screenOptions={{ headerShown: false }}>
-      <MyStack.Group children>
+    <MyStack.Navigator
+      initialRouteName={index}
+      screenOptions={{ headerShown: false }}
+    >
+      <MyStack.Group>
         <MyStack.Screen name={index} component={Home} />
         <MyStack.Screen name={registerScreen} component={RegisterScreen} />
       </MyStack.Group>

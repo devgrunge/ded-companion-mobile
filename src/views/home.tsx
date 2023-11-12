@@ -1,11 +1,11 @@
 import React, { FC } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { useTheme, TextInput } from "react-native-paper";
+import { useTheme, TextInput, Button } from "react-native-paper";
 import { useApiGet } from "../hooks/useApi";
 import { useNavigation } from "@react-navigation/native";
 
 const Home: FC<React.ReactElement> = () => {
-  const { data, status, statusText } = useApiGet("http://localhost:3338");
+  const { data } = useApiGet("http://localhost:3338/");
   const theme = useTheme();
   let text: string;
 
@@ -19,7 +19,7 @@ const Home: FC<React.ReactElement> = () => {
   return (
     <View style={styles.container}>
       <Text
-        style={{ fontSize: 20, fontWeight: "600", color: theme.colors.outline }}
+        style={{ fontSize: 20, fontWeight: "600", color: theme.colors.primary }}
       >
         Login with your account
       </Text>
@@ -46,7 +46,7 @@ const Home: FC<React.ReactElement> = () => {
         placeholder="Password"
         value={text}
       />
-      <TouchableOpacity
+      <Button
         onPress={handleNavigation}
         style={{
           backgroundColor: theme.colors.primaryContainer,
@@ -57,9 +57,10 @@ const Home: FC<React.ReactElement> = () => {
           borderColor: theme.colors.shadow,
           borderWidth: 1
         }}
+        icon="login"
       >
         <Text style={{ color: theme.colors.shadow }}>Login</Text>
-      </TouchableOpacity>
+      </Button>
     </View>
   );
 };
