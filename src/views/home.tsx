@@ -5,16 +5,17 @@ import { useApiGet } from "../hooks/useApi";
 import { useNavigation } from "@react-navigation/native";
 
 const Home: FC<React.ReactElement> = () => {
-  const { data } = useApiGet("http://localhost:3338/");
+  const apiUrl: string = "http://dndapi.com:3338";
+  const { data, error } = useApiGet(apiUrl);
   const theme = useTheme();
   let text: string;
 
   const navigation = useNavigation();
+  console.log("my data ===>", data);
 
   const handleNavigation = () => {
     navigation.navigate("register" as never);
   };
-  console.log("==>", data);
 
   return (
     <View style={styles.container}>

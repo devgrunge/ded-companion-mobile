@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Toast from 'react-native-toast-message';
 
@@ -13,29 +12,22 @@ export type TApiResponse = {
 export const useApiGet = (url: string): TApiResponse => {
     const [status, setStatus] = useState<number>(0);
     const [statusText, setStatusText] = useState<string>('');
-    const [data, setData] = useState<any>();
-    const [error, setError] = useState<any>();
+    const [data, setData] = useState<unknown>();
+    const [error, setError] = useState<unknown>();
     const [loading, setLoading] = useState<boolean>(false);
 
     const getAPIData = async () => {
         setLoading(true);
         try {
-            const request = await axios.get(url);
-            setData(request.data);
-            setStatus(request.status);
-            setStatusText(request.statusText);
-            Toast.show({
-                type: 'success',
-                text1: 'Hello, ',
-                text2: 'Welcome to your battle companion 👋'
-            });
+            const response = await fetch(url);
+            console.log("my response status", response.status);
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Network response was not 200. Details: ${errorText}`);
+            }
         } catch (error) {
             setError(error);
-            Toast.show({
-                type: 'error',
-                text1: 'Hello, ',
-                text2: 'Could not connect to server 👋'
-            });
+            console.error("Server error: ",error);
         }
         setLoading(false);
     };
@@ -46,4 +38,5 @@ export const useApiGet = (url: string): TApiResponse => {
 
     return { status, statusText, data, error, loading };
 };
+
 
