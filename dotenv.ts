@@ -1,0 +1,1 @@
+export const REACT_NATIVE_APP_API_URL="http://dndapi.com:3338"

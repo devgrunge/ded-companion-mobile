@@ -1,11 +1,18 @@
 import React, { FC } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { useTheme, TextInput, Button } from "react-native-paper";
+import {
+  useTheme,
+  TextInput,
+  Button,
+  ActivityIndicator
+} from "react-native-paper";
 import { useApiGet } from "../hooks/useApi";
 import { useNavigation } from "@react-navigation/native";
+import { REACT_NATIVE_APP_API_URL } from "../../dotenv";
 
 const Home: FC<React.ReactElement> = () => {
-  const apiUrl: string = "http://dndapi.com:3338";
+  const apiUrl = REACT_NATIVE_APP_API_URL;
+
   const { data, error } = useApiGet(apiUrl);
   const theme = useTheme();
   let text: string;
@@ -20,10 +27,33 @@ const Home: FC<React.ReactElement> = () => {
   return (
     <View style={styles.container}>
       <Text
-        style={{ fontSize: 20, fontWeight: "600", color: theme.colors.primary }}
+        style={{
+          fontSize: 20,
+          fontWeight: "600",
+          color: theme.colors.primary
+        }}
       >
         Login with your account
       </Text>
+      {error && <Text>Error: {error}</Text>}
+      {data && (
+        <>
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: "600",
+              color: theme.colors.primary
+            }}
+          >
+            {data.success}
+          </Text>
+          {/* Other UI elements */}
+        </>
+      )}
+      {/* Loading spinner */}
+      {!data && !error && (
+        <ActivityIndicator size="large" color={theme.colors.primary} />
+      )}
       <TextInput
         style={{
           width: "80%",

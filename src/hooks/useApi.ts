@@ -1,15 +1,8 @@
 import { useState, useEffect } from 'react';
 import Toast from 'react-native-toast-message';
+import { ApiResponseType } from './types/apiTypes';
 
-export type TApiResponse = {
-    status: number;
-    statusText: string;
-    data: unknown;
-    error: unknown;
-    loading: boolean;
-};
-
-export const useApiGet = (url: string): TApiResponse => {
+export const useApiGet = (url: string): ApiResponseType => {
     const [status, setStatus] = useState<number>(0);
     const [statusText, setStatusText] = useState<string>('');
     const [data, setData] = useState<unknown>();
@@ -18,20 +11,30 @@ export const useApiGet = (url: string): TApiResponse => {
 
     const getAPIData = async () => {
         setLoading(true);
+
         try {
-            const response = await fetch(url);
-            console.log("my response status", response.status);
+            if (!url) {
+                throw new Error("URL is undefined");
+            }
+
+            const response = await fetch(url, {
+                headers: {
+                    Accept: 'application/json',
+                },
+            });
+
             if (!response.ok) {
                 const errorText = await response.text();
                 throw new Error(`Network response was not 200. Details: ${errorText}`);
             }
+
+            const responseData = await response.json();
+            setData(responseData);
         } catch (error) {
             setError(error);
-            console.error("Server error: ",error);
+            console.error("Server error:", error);
         }
-        setLoading(false);
     };
-
     useEffect(() => {
         getAPIData();
     }, [url]);
