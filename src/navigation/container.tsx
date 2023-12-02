@@ -4,12 +4,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "../store";
 import { Provider } from "react-redux";
-import { PaperProvider } from "react-native-paper";
+import { DefaultTheme, PaperProvider } from "react-native-paper";
 import Stack from "./stacks";
 
-/**
- * Default Stack under stacks folders
- */
 interface INavConteiner {
   callback?: () => void;
 }
@@ -18,7 +15,7 @@ const NavContainer = ({ callback }: INavConteiner) => {
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <NavigationContainer onReady={callback}>
-          <PaperProvider>
+          <PaperProvider theme={DefaultTheme}>
             <StatusBar barStyle="light-content" />
             <SafeAreaView />
             <Stack />

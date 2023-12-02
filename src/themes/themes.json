@@ -1,0 +1,10 @@
+{
+    "default_theme": {
+        "colors": "white",
+        "secondary": "blue"
+    },
+    "secondaryTheme": {
+        "colors": "white",
+        "secondary": "purple"
+    }
+}
