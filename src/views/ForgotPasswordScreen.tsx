@@ -9,6 +9,7 @@ import TextInput from "../components/TextInput";
 import { theme } from "../core/theme";
 import Button from "../components/Button";
 import { Navigation } from "./types";
+import { LOGIN_PAGE } from "../navigation/screenNames";
 
 type Props = {
   navigation: Navigation;
@@ -25,12 +26,12 @@ const ForgotPasswordScreen = ({ navigation }: Props) => {
       return;
     }
 
-    navigation.navigate("LoginScreen");
+    navigation.navigate(LOGIN_PAGE);
   };
 
   return (
     <Background>
-      <BackButton goBack={() => navigation.navigate("LoginScreen")} />
+      <BackButton goBack={() => navigation.navigate(LOGIN_PAGE)} />
 
       <Logo />
 
@@ -55,7 +56,7 @@ const ForgotPasswordScreen = ({ navigation }: Props) => {
 
       <TouchableOpacity
         style={styles.back}
-        onPress={() => navigation.navigate("LoginScreen")}
+        onPress={() => navigation.navigate(LOGIN_PAGE)}
       >
         <Text style={styles.label}>← Back to login</Text>
       </TouchableOpacity>
